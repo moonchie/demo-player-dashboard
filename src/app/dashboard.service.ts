@@ -10,9 +10,13 @@ import { environment } from '../environments/environment.prod';
 
 export class DashboardService {
 
-  constructor(private http: HttpClient) {}
+  private playersUrl = 'http://cdn.55labs.com/demo/api.json';
+
+  constructor(
+    private http: HttpClient) {}
 
   getJsonData() {
     return this.http.get("http://cdn.55labs.com/demo/api.json").toPromise();
   }
+
 }
