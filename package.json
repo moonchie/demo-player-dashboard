@@ -23,9 +23,9 @@
     "angular-6-datatable": "^0.8.0",
     "angular-google-charts": "0.0.9",
     "core-js": "^2.5.4",
+    "ng2-google-charts": "^3.4.0",
     "rxjs": "^6.0.0",
-    "zone.js": "~0.8.26",
-    "googlemaps": "^1.12.0"
+    "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",

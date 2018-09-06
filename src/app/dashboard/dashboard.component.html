@@ -1,12 +1,4 @@
 <h2>{{title}}</h2>
 
-<div class="divTable">
-  <div class="divTableBody">
-    <div class="divTableRow">
-        <div class="divTableCell">
-          <bar-chart [data]="data" [config]="config" [elementId]="elementId"></bar-chart>
-        </div>
-    </div>
-  </div>
-
-</div>
+<google-chart [data]="columnChartData"></google-chart>
+<input type="button" value="Change data" (click)="changeData()"> <input type="button" value="Change chart type" (click)="changeChartType()">
