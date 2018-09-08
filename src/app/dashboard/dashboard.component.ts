@@ -15,20 +15,27 @@ export class DashboardComponent implements OnInit {
   johnPoints: Array<number>;
   larryPoints: Array<number>;
 
+  // for put dates
+  cleanedDates: Array<number> = [];
+  cleanedJohn: Array<number> = [];
+  cleanedLarry: Array<number> = [];
+  resultArray: Array<any> = [];
+
 
   public columnChartData:any =  {
     chartType: 'ColumnChart',
     dataTable:
     // put the data source here
-    [
-      ['Country', 'Performance', 'Profits'],
-      ['Germany', 700, 1200],
-      ['USA', 300, 600],
-      ['Brazil', 400, 500],
-      ['Canada', 500, 1000],
-      ['France', 600, 1100],
-      ['RU', 800, 1000]
-    ],
+    // [
+    //   ['Country', 'Performance', 'Profits'],
+    //   ['Germany', 700, 1200],
+    //   ['USA', 300, 600],
+    //   ['Brazil', 400, 500],
+    //   ['Canada', 500, 1000],
+    //   ['France', 600, 1100],
+    //   ['RU', 800, 1000]
+    // ]
+    this.resultArray,
     options: {title: 'Countries'}
   };
 
@@ -43,10 +50,11 @@ export class DashboardComponent implements OnInit {
       this.johnPoints = result['data']['DAILY']['dataByMember']['players']['john']['points'];
       this.larryPoints = result['data']['DAILY']['dataByMember']['players']['larry']['points'];
 
-      console.log(this.cleanDate(this.dates));
-      console.log(this.johnPoints);
+      console.log(this.cleanDates(this.dates));
+      console.log(this.cleanData(this.johnPoints));
+      console.log(this.cleanData(this.larryPoints))
       console.log("==========");
-      console.log(this.makeDataChar(this.dates, this.johnPoints, this.larryPoints));
+      console.log(this.concatArray(this.cleanedDates, this.johnPoints, this.larryPoints));
       console.log("++++");
 
 
@@ -56,24 +64,32 @@ export class DashboardComponent implements OnInit {
     })
   };
 
-  // data to be used
-  result = [];
-  makeDataChar(dates, data1, data2){
-    let i = -1;
-    while (dates[++i]){
-      this.result.push([dates[i], data1[i], data2[i]]);
-    }
-    return this.result
+  concatArray(column,arr1, arr2){
+    for ( var x in column){
+        this.resultArray.push([column[x],arr1[x],arr2[x]])
+    };
+    return this.resultArray;
+}
+
+cleanDates(arr){
+  for ( var x in arr){
+      if(arr[x] === null){
+          this.cleanedDates.push(Number(arr[x-1]) + 1)
+      } else {
+      this.cleanedDates.push(Number(arr[x]))
+      };
   }
+  return this.cleanedDates
+}
 
-
-  cleanDate(dates){
-
-    for (let x in dates){
-      parseInt(dates[x]);
-    }
-    return dates;
+cleanData(arr){
+  for ( var x in arr){
+      if(arr[x] === null){
+          arr[x] = '-';
+      }
   }
+  return arr
+}
 
 
 }
